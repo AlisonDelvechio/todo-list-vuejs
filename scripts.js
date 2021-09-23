@@ -15,13 +15,18 @@ const todoList = {
             if (this.newItem.description) {
                 this.list.push(this.newItem);
                 this.newItem = {};
+
+                localStorage.setItem('list', JSON.stringify(this.list));
             } else {
                 alert("Não é possível inserir vazio!");
             }
         },
-        clearList: function() {
-            this.list = [];
+        updateStorage: function() {
+            localStorage.setItem('list', JSON.stringify(this.list));
         }
+    },
+    created() {
+        this.list = localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : this.list;
     },
 };
 
